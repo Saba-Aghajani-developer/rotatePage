@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating Namigation</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        overflow-x: hidden;
+        background-color: #222;
+    }
+
+    main {
+        background-color: #eee;
+        color: #222;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        padding: 15px;
+        text-align: justify;
+        transition: 1s;
+        transform-origin: 0 0 ;
+    }
+
+    .box {
+        width: 80%;
+        height: auto;
+        margin: 70px auto 20px;
+    }
+
+    .menu {
+        width: 100px;
+        height: 100px;
+        background-color: #FE7979;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 0 0 100px 0;
+        z-index: 1000;
+    }
+
+    ul {
+        width: 100px;
+        height: 400px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        transition: 1.2s;
+    }
+
+    li {
+        position: fixed;
+        left: -100%;
+        list-style-type: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #eee;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+
+    li:nth-of-type(1) {
+        bottom: 200px;
+        transition: 1.2s;
+    }
+
+    li:nth-of-type(2) {
+        bottom: 120px;
+        transition: 1.4s;
+    }
+
+    li:nth-of-type(3) {
+        bottom: 40px;
+        transition: 1.6s;
+    }
+
+    .menu>div {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        transition: 1s;
+        cursor: pointer;
+    }
+
+    .menu>div:first-of-type {
+        top: 40%;
+        left: 40%;
+    }
+
+    .menu>div:last-of-type {
+        left: -100%;
+        top: 90%;
+    }
+
+    .menu>div>svg {
+        color: #eee;
+    }
+
+    .box>h1 {
+        text-transform: capitalize;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        padding: 10px 0;
+    }
+
+    .box>h5 {
+        font-size: 20px;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        text-transform: capitalize;
+        padding: 30px 0 10px;
+    }
+
+    .boxChild {
+        width: 100%;
+        height: 600px;
+        padding-bottom: 20px;
+    }
+
+    .boxChild>img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+
+<body>
+    <div class="menu">
+        <div class="top">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </div>
+        <div class="bottom">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-plus-lg"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+            </svg>
+        </div>
+    </div>
+    <ul>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                <path
+                    d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+            </svg>
+            HOME</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill"
+                viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+            </svg>
+            ABOUT</li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                <path
+                    d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+            </svg>
+            CONTACT</li>
+    </ul>
+    <main>
+        <div class="box">
+            <h1>rotating navigating</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quia in ratione dolores cupiditate,
+                maxime aliquid impedit dolorem nam dolor omnis atque fuga labore modi veritatis porro laborum minus,
+                illo, maiores recusandae cumque ipsa quos. Tenetur, consequuntur mollitia labore pariatur sunt quia
+                harum aut. Eum maxime dolorem provident natus veritatis molestiae cumque quod voluptates ab non, tempore
+                cupiditate? Voluptatem, molestias culpa. Corrupti, laudantium iure aliquam rerum sint nam quas dolor
+                dignissimos in error placeat quae temporibus minus optio eum soluta cupiditate! Cupiditate saepe
+                voluptates laudantium. Ducimus consequuntur perferendis consequatur nobis exercitationem molestias
+                fugiat commodi omnis. Asperiores quia tenetur nemo ipsa.</p>
+            <h5>my dog</h5>
+            <div class="boxChild">
+                <img src="img/1.avif" alt="">
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quia in ratione dolores cupiditate,
+                maxime aliquid impedit dolorem nam dolor omnis atque fuga labore modi veritatis porro laborum minus,
+                illo, maiores recusandae cumque ipsa quos. Tenetur, consequuntur mollitia labore pariatur sunt quia
+                harum aut. Eum maxime dolorem provident natus veritatis molestiae cumque quod voluptates ab non, tempore
+                cupiditate? Voluptatem, molestias culpa. Corrupti, laudantium iure aliquam rerum sint nam quas dolor
+                dignissimos in error placeat quae temporibus minus optio eum soluta cupiditate! Cupiditate saepe
+                voluptates laudantium. Ducimus consequuntur perferendis consequatur nobis exercitationem molestias
+                fugiat commodi omnis. Asperiores quia tenetur nemo ipsa.</p>
+        </div>
+    </main>
+</body>
+<script>
+    let flag = 0
+    document.getElementsByClassName('menu')[0].addEventListener('click', () => {
+        document.getElementsByTagName('main')[0].style.transformOrigin = '0 0'
+        const _li = document.querySelectorAll('ul>li')
+        if (flag == 0) {
+            document.getElementsByTagName('main')[0].style.transform = "rotate(-20deg)"
+            _li[0].style.left = '50px'
+            _li[1].style.left = '60px'
+            _li[2].style.left = '70px'
+            document.querySelector('.menu>.top').style.top = '-50%'
+            document.querySelector('.menu>.top').style.left = '90%'
+            document.querySelector('.menu>.top').style.transformOrigin = '50% 50%'
+            document.querySelector('.menu>.top').style.transform = "translate(-50%,-50%) rotate(-90deg)"
+            document.querySelector('.menu>.bottom').style.transformOrigin = '50% 50%'
+            document.querySelector('.menu>.bottom').style.transform = "translate(-50%,-50%) rotate(-90deg)"
+            document.querySelector('.menu>.bottom').style.left = '40%'
+            document.querySelector('.menu>.bottom').style.top = '40%'
+            flag++
+        } else {
+            document.getElementsByTagName('main')[0].style.transform = "rotate(0deg)"
+            document.getElementsByTagName('ul')[0].style.left = -100 + 'px'
+            for (i = 0; i < 3; i++) {
+                _li[i].style.left = '-100%'
+            }
+            document.querySelector('.menu>.top').style.top = '40%'
+            document.querySelector('.menu>.top').style.left = '40%'
+            document.querySelector('.menu>.top').style.transformOrigin = '50% 50%'
+            document.querySelector('.menu>.top').style.transform = " translate(-50%,-50%) rotate(0deg)"
+            document.querySelector('.menu>.bottom').style.transform = "translate(-50%,-50%) rotate(0deg)"
+            document.querySelector('.menu>.bottom').style.left = '-50%'
+            document.querySelector('.menu>.bottom').style.top = '90%'
+            flag--
+        }
+    })
+</script>
+
+</html>
